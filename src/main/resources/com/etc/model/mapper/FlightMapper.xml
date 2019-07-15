@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etc.model.dao.FlightMapper" >
+  <resultMap id="BaseResultMap" type="com.etc.model.entity.Flight" >
+    <id column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="fno" property="fno" jdbcType="VARCHAR" />
+    <result column="departure" property="departure" jdbcType="VARCHAR" />
+    <result column="arrival" property="arrival" jdbcType="VARCHAR" />
+    <result column="ptype" property="ptype" jdbcType="VARCHAR" />
+    <result column="std" property="std" jdbcType="TIMESTAMP" />
+    <result column="sta" property="sta" jdbcType="TIMESTAMP" />
+    <result column="atd" property="atd" jdbcType="TIMESTAMP" />
+    <result column="ata" property="ata" jdbcType="TIMESTAMP" />
+    <result column="atype" property="atype" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fno, departure, arrival, ptype, std, sta, atd, ata, atype
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.etc.model.entity.FlightExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from flight
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from flight
+    where fid = #{fid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from flight
+    where fid = #{fid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.etc.model.entity.FlightExample" >
+    delete from flight
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.etc.model.entity.Flight" >
+    insert into flight (fid, fno, departure, 
+      arrival, ptype, std, 
+      sta, atd, ata, 
+      atype)
+    values (#{fid,jdbcType=INTEGER}, #{fno,jdbcType=VARCHAR}, #{departure,jdbcType=VARCHAR}, 
+      #{arrival,jdbcType=VARCHAR}, #{ptype,jdbcType=VARCHAR}, #{std,jdbcType=TIMESTAMP}, 
+      #{sta,jdbcType=TIMESTAMP}, #{atd,jdbcType=TIMESTAMP}, #{ata,jdbcType=TIMESTAMP}, 
+      #{atype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.etc.model.entity.Flight" >
+    insert into flight
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fno != null" >
+        fno,
+      </if>
+      <if test="departure != null" >
+        departure,
+      </if>
+      <if test="arrival != null" >
+        arrival,
+      </if>
+      <if test="ptype != null" >
+        ptype,
+      </if>
+      <if test="std != null" >
+        std,
+      </if>
+      <if test="sta != null" >
+        sta,
+      </if>
+      <if test="atd != null" >
+        atd,
+      </if>
+      <if test="ata != null" >
+        ata,
+      </if>
+      <if test="atype != null" >
+        atype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fno != null" >
+        #{fno,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null" >
+        #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="arrival != null" >
+        #{arrival,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null" >
+        #{ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="std != null" >
+        #{std,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sta != null" >
+        #{sta,jdbcType=TIMESTAMP},
+      </if>
+      <if test="atd != null" >
+        #{atd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ata != null" >
+        #{ata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="atype != null" >
+        #{atype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.etc.model.entity.FlightExample" resultType="java.lang.Integer" >
+    select count(*) from flight
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update flight
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fno != null" >
+        fno = #{record.fno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departure != null" >
+        departure = #{record.departure,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arrival != null" >
+        arrival = #{record.arrival,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptype != null" >
+        ptype = #{record.ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.std != null" >
+        std = #{record.std,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sta != null" >
+        sta = #{record.sta,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.atd != null" >
+        atd = #{record.atd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.ata != null" >
+        ata = #{record.ata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.atype != null" >
+        atype = #{record.atype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update flight
+    set fid = #{record.fid,jdbcType=INTEGER},
+      fno = #{record.fno,jdbcType=VARCHAR},
+      departure = #{record.departure,jdbcType=VARCHAR},
+      arrival = #{record.arrival,jdbcType=VARCHAR},
+      ptype = #{record.ptype,jdbcType=VARCHAR},
+      std = #{record.std,jdbcType=TIMESTAMP},
+      sta = #{record.sta,jdbcType=TIMESTAMP},
+      atd = #{record.atd,jdbcType=TIMESTAMP},
+      ata = #{record.ata,jdbcType=TIMESTAMP},
+      atype = #{record.atype,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.etc.model.entity.Flight" >
+    update flight
+    <set >
+      <if test="fno != null" >
+        fno = #{fno,jdbcType=VARCHAR},
+      </if>
+      <if test="departure != null" >
+        departure = #{departure,jdbcType=VARCHAR},
+      </if>
+      <if test="arrival != null" >
+        arrival = #{arrival,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null" >
+        ptype = #{ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="std != null" >
+        std = #{std,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sta != null" >
+        sta = #{sta,jdbcType=TIMESTAMP},
+      </if>
+      <if test="atd != null" >
+        atd = #{atd,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ata != null" >
+        ata = #{ata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="atype != null" >
+        atype = #{atype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.etc.model.entity.Flight" >
+    update flight
+    set fno = #{fno,jdbcType=VARCHAR},
+      departure = #{departure,jdbcType=VARCHAR},
+      arrival = #{arrival,jdbcType=VARCHAR},
+      ptype = #{ptype,jdbcType=VARCHAR},
+      std = #{std,jdbcType=TIMESTAMP},
+      sta = #{sta,jdbcType=TIMESTAMP},
+      atd = #{atd,jdbcType=TIMESTAMP},
+      ata = #{ata,jdbcType=TIMESTAMP},
+      atype = #{atype,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=INTEGER}
+  </update>
+</mapper>
