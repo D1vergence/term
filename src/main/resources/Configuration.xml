@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <!-- 引入配置文件 -->
+    <properties resource="init.properties"/>
+
+    <!-- 一个数据库一个context -->
+    <context id="term">
+        <!-- 注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true"/> <!-- 是否生成注释代时间戳-->
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="${jdbc_driver}"
+                        connectionURL="${jdbc_url}"
+                        userId="${jdbc_user}"
+                        password="${jdbc_password}">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+
+        <!-- 生成实体类地址 -->
+        <javaModelGenerator targetPackage="com.etc.model.entity" targetProject="${project}">
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 生成mapxml文件 -->
+        <sqlMapGenerator targetPackage="com.etc.model.mapper" targetProject="src/main/resources">
+        </sqlMapGenerator>
+
+        <!-- 生成mapxml对应client，也就是接口dao -->
+        <javaClientGenerator targetPackage="com.etc.model.dao" targetProject="${project}" type="XMLMAPPER">
+        </javaClientGenerator>
+
+        <!-- 配置表信息 -->
+        <!--<table tableName="goods"></table>-->
+        <!--<table tableName="orderinfo"></table>-->
+        <!--<table tableName="admin"></table>-->
+        <!--<table tableName="customer"></table>-->
+        <!--<table tableName="detail"></table>-->
+
+        <table schema="air" tableName="admin"></table>
+        <table schema="air" tableName="flight"></table>
+
+    </context>
+</generatorConfiguration>
