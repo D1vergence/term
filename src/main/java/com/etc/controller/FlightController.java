@@ -29,7 +29,7 @@ public class FlightController {
     @GetMapping("/")
     public String indexGetFlight(Model model){
         model.addAttribute("list",flightInfoMapper.selectByExample(null));
-        return "index";
+        return "statistical";
     }
 
     @ResponseBody
