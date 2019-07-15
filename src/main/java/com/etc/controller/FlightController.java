@@ -26,6 +26,12 @@ public class FlightController {
         return "flight";
     }
 
+    @GetMapping("/")
+    public String indexGetFlight(Model model){
+        model.addAttribute("list",flightInfoMapper.selectByExample(null));
+        return "index";
+    }
+
     @ResponseBody
     @GetMapping("/flightInfo/page/{pageNum}")
     public List<FlightInfo> getPartFlight(@PathVariable Integer pageNum){

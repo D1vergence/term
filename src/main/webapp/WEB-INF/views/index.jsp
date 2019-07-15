@@ -44,47 +44,44 @@
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover"
-                                           id="dataTables-example">
-                                        <thead>
-                                        <tr>
-                                            <th>编号</th>
-                                            <th>客户名</th>
-                                            <th>手机</th>
-                                            <th>状态</th>
-                                            <th>修改</th>
-                                            <th>冻结/解冻</th>
-                                            <th>删除</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:if test="${not empty list}">
-                                            <c:forEach items="${list }" var="cus">
-                                                <tr>
-                                                    <td>
-                                                        <a href="<%=basePath%>OrdersServlet?op=toModifyPage&id=${cus.cid}">${cus.cid}</a>
-                                                    </td>
-                                                    <td>${cus.cname}</td>
-                                                    <td>${cus.mobile}</td>
-                                                    <td>${cus.status==1?"正常":"冻结"}</td>
-                                                    <td><a id="a_id" href="#" data-toggle="modal"
-                                                           data-target="#myModal" onclick="editInfo(this,1)"> <span
-                                                            class="glyphicon glyphicon-align-center"></span>
-                                                    </a></td>
-                                                    <td><a
-                                                            href="javascript:doFreeze(${cus.cid},${cus.status});"
-                                                            style="color: rgb(212, 106, 64);"> <span
-                                                            class="glyphicon glyphicon-retweet"></span>
-                                                    </a></td>
-                                                    <td><a href="javascript:doDelete(${cus.cid })"
-                                                           style="color: rgb(212, 106, 64);"> <span
-                                                            class="glyphicon glyphicon-remove"></span>
-                                                    </a></td>
-                                                </tr>
-                                            </c:forEach>
-                                        </c:if>
-                                        </tbody>
-                                    </table>
+                                    <!-- 分页信息 -->
+                                            <div class="row">
+                                                <!-- 分页文字信息，其中分页信息都封装在pageInfo中 -->
+                                                <div class="col-md-6">
+                                                    当前第：${pageInfo.pageNum}页，总共：${pageInfo.pages}页，总共：${pageInfo.total}条记录
+                                                </div>
+                                            <!-- 分页条 -->
+                                                <div class="col-md-6">
+                                                    <nav aria-label="Page navigation">
+                                                      <ul class="pagination">
+                                                        <li><a href="${pageContext.request.contextPath}/showflight?pn=1">首页</a></li>
+                                                        <c:if test="${pageInfo.hasPreviousPage }">
+                                                             <li>
+                                                              <a href="${path}/showflight?pn=${pageInfo.pageNum-1}" aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
+                                                              </a>
+                                                            </li>
+                                                        </c:if>
+                                                        <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
+                                                            <c:if test="${page_Num == pageInfo.pageNum }">
+                                                                <li class="active"><a href="#">${ page_Num}</a></li>
+                                                            </c:if>
+                                                            <c:if test="${page_Num != pageInfo.pageNum }">
+                                                                <li><a href="${pageContext.request.contextPath}/showflight?pn=${ page_Num}">${ page_Num}</a></li>
+                                                            </c:if>
+                                                        </c:forEach>
+                                                        <c:if test="${pageInfo.hasNextPage }">
+                                                            <li>
+                                                              <a href="${pageContext.request.contextPath}/showflight?pn=${pageInfo.pageNum+1}" aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                              </a>
+                                                            </li>
+                                                        </c:if>  
+                                                        <li><a href="${pageContext.request.contextPath}/showflight?pn=${pageInfo.pages}">末页</a></li>
+                                                      </ul>
+                                                    </nav>
+                                                </div>
+                                            </div>
                                 </div>
                             </div>
                         </div>
