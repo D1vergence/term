@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.etc.model.dao.FunctionalMapper" >
+    <resultMap id="BaseResultMap" type="com.etc.model.entity.FlightInfo" >
+        <id column="fid" property="fid" jdbcType="VARCHAR" />
+        <result column="fno" property="fno" jdbcType="VARCHAR" />
+        <result column="departure" property="departure" jdbcType="VARCHAR" />
+        <result column="arrival" property="arrival" jdbcType="VARCHAR" />
+        <result column="ptype" property="ptype" jdbcType="VARCHAR" />
+        <result column="sta" property="sta" jdbcType="VARCHAR" />
+        <result column="std" property="std" jdbcType="VARCHAR" />
+        <result column="ata" property="ata" jdbcType="VARCHAR" />
+        <result column="atd" property="atd" jdbcType="VARCHAR" />
+        <result column="atype" property="atype" jdbcType="VARCHAR" />
+        <result column="airport" property="airport" jdbcType="VARCHAR" />
+        <result column="lat" property="lat" jdbcType="VARCHAR" />
+        <result column="lon" property="lon" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        fid, fno, departure, arrival, ptype, sta, std, ata, atd, atype, airport, lat, lon
+    </sql>
+
+    <select id="findByPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from flight_info
+    </select>
+
+</mapper>

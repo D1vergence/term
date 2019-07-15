@@ -17,171 +17,170 @@
         <jsp:include page="/part/manager.css.jsp"></jsp:include>
     </head>
     <body>
-        <div id="wrapper">
-            <!--头部-->
-            <jsp:include page="/part/manager.header.jsp"></jsp:include>
-            <!--导航栏class="active-menu-->
-            <jsp:include page="/part/manager.menu.jsp"></jsp:include>
-            <!--表格-->
-            <div id="page-wrapper">
-                <div id="page-inner">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Advanced Tables -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <font size="4">用户信息管理</font> <a
-                                        href="showflight.html"> <span
-                                        class="glyphicon glyphicon-repeat"></span>
-                                </a>
-                                    <span style="float: right">
+    <div id="wrapper">
+        <!--头部-->
+        <jsp:include page="/part/manager.header.jsp"></jsp:include>
+        <!--导航栏class="active-menu-->
+        <jsp:include page="/part/manager.menu.jsp"></jsp:include>
+        <!--表格-->
+        <div id="page-wrapper">
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Advanced Tables -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <font size="4">用户信息管理</font> <a
+                                    href="showflight.html"> <span
+                                    class="glyphicon glyphicon-repeat"></span>
+                            </a>
+                                <span style="float: right">
 									<button type="button" class="btn btn-default btn-sm"
                                             data-toggle="modal" data-target="#myModal"
                                             onclick="editInfo(this,0)">
 										<span class="glyphicon glyphicon-plane"></span> 添加客户
 									</button>
-								</span>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="table-responsive">
-                                        <!-- 分页信息 -->
-                                                <div class="row">
-                                                    <!-- 分页文字信息，其中分页信息都封装在pageInfo中 -->
-                                                    <div class="col-md-6">
-                                                        当前第：${pageInfo.pageNum}页，总共：${pageInfo.pages}页，总共：${pageInfo.total}条记录
-                                                    </div>
-                                                <!-- 分页条 -->
-                                                    <div class="col-md-6">
-                                                        <nav aria-label="Page navigation">
-                                                          <ul class="pagination">
-                                                            <li><a href="${pageContext.request.contextPath}/showflight?pn=1">首页</a></li>
-                                                            <c:if test="${pageInfo.hasPreviousPage }">
-                                                                 <li>
-                                                                  <a href="${path}/showflight?pn=${pageInfo.pageNum-1}" aria-label="Previous">
-                                                                    <span aria-hidden="true">&laquo;</span>
-                                                                  </a>
-                                                                </li>
-                                                            </c:if>
-                                                            <c:forEach items="${pageInfo.navigatepageNums }" var="page_Num">
-                                                                <c:if test="${page_Num == pageInfo.pageNum }">
-                                                                    <li class="active"><a href="#">${ page_Num}</a></li>
-                                                                </c:if>
-                                                                <c:if test="${page_Num != pageInfo.pageNum }">
-                                                                    <li><a href="${pageContext.request.contextPath}/showflight?pn=${ page_Num}">${ page_Num}</a></li>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <c:if test="${pageInfo.hasNextPage }">
-                                                                <li>
-                                                                  <a href="${pageContext.request.contextPath}/showflight?pn=${pageInfo.pageNum+1}" aria-label="Next">
-                                                                    <span aria-hidden="true">&raquo;</span>
-                                                                  </a>
-                                                                </li>
-                                                            </c:if>  
-                                                            <li><a href="${pageContext.request.contextPath}/showflight?pn=${pageInfo.pages}">末页</a></li>
-                                                          </ul>
-                                                        </nav>
-                                                    </div>
-                                                </div>
-                                          </div>
-                                    </div>
+								    </span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover"
+                                           id="dataTables-example">
+                                        <thead>
+                                        <tr>
+                                            <th>航班号</th>
+                                            <th>出发地</th>
+                                            <th>目的地</th>
+                                            <th>机型</th>
+                                            <th>预计出发时间</th>
+                                            <th>预计到达时间</th>
+                                            <th>实际出发时间</th>
+                                            <th>实际到达时间</th>
+                                            <th>目的机场</th>
+                                            <th>进出港类型</th>
+                                            <th>经度</th>
+                                            <th>纬度</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <%--<c:if test="${not empty list}">--%>
+                                            <%--<c:forEach items="${list }" var="flight">--%>
+                                                <%--<tr>--%>
+                                                    <%--<td>${flight.fno}</td>--%>
+                                                    <%--<td>${flight.departure}</td>--%>
+                                                    <%--<td>${flight.arrival}</td>--%>
+                                                    <%--<td>${flight.ptype}</td>--%>
+                                                    <%--<td>${flight.std}</td>--%>
+                                                    <%--<td>${flight.sta}</td>--%>
+                                                    <%--<td>${flight.atd}</td>--%>
+                                                    <%--<td>${flight.ata}</td>--%>
+                                                    <%--<td>${flight.airport}</td>--%>
+                                                    <%--<td>${flight.atype}</td>--%>
+                                                    <%--<td>${flight.lon}</td>--%>
+                                                    <%--<td>${flight.lat}</td>--%>
+                                                <%--</tr>--%>
+                                            <%--</c:forEach>--%>
+                                        <%--</c:if>--%>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <!--End Advanced Tables -->
-                            <!-- 按钮触发模态框 -->
-                            <!-- 模态框（Modal） myModal-->
-                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                                 aria-labelledby="myModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal"
-                                                    aria-hidden="true">×
-                                            </button>
-                                            <form action="<%=basePath%>CustomerServlet"
-                                                  method="post">
-                                                <input type="hidden" id="op" name="op">
-                                                <table class="table" style="font: '黑体';">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>信息：<input type="hidden" id="cid" name="cid"></th>
-                                                        <th></th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td><b>客户名:</b></td>
-                                                        <td><input type="text" id="cname" name="cname"
-                                                                   class="form-control"/></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>手机：</b></td>
-                                                        <td><input type="text" id="mobile" name="mobile"
-                                                                   class="form-control"/></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><b>状态：</b></td>
-                                                        <td><select id="status" name="status"
-                                                                    class="form-control">
-                                                            <option value="1">正常</option>
-                                                            <option value="2">冻结</option>
-                                                        </select></td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default"
-                                                            data-dismiss="modal">关闭
-                                                    </button>
-                                                    <input type="submit" value="提交" class="btn btn-primary">
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.modal-dialog -->
-                            </div>
-                            <!-- /.modal -->
                         </div>
+                        <!--End Advanced Tables -->
+                        <!-- 按钮触发模态框 -->
+                        <!-- 模态框（Modal） myModal-->
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                             aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"
+                                                aria-hidden="true">×
+                                        </button>
+                                        <form action="<%=basePath%>CustomerServlet"
+                                              method="post">
+                                            <input type="hidden" id="op" name="op">
+                                            <table class="table" style="font: '黑体';">
+                                                <thead>
+                                                <tr>
+                                                    <th>信息：<input type="hidden" id="cid" name="cid"></th>
+                                                    <th></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td><b>客户名:</b></td>
+                                                    <td><input type="text" id="cname" name="cname"
+                                                               class="form-control"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>手机：</b></td>
+                                                    <td><input type="text" id="mobile" name="mobile"
+                                                               class="form-control"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>状态：</b></td>
+                                                    <td><select id="status" name="status"
+                                                                class="form-control">
+                                                        <option value="1">正常</option>
+                                                        <option value="2">冻结</option>
+                                                    </select></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">关闭
+                                                </button>
+                                                <input type="submit" value="提交" class="btn btn-primary">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.modal-dialog -->
+                        </div>
+                        <!-- /.modal -->
                     </div>
                 </div>
             </div>
         </div>
-        <jsp:include page="/part/manager.js.jsp"></jsp:include>
-        <script>
-            // function doDelete(id) {
-            //     if (confirm("您确定要删除编号为:" + id + "的客户吗？")) {
-            //         location.href = 'deleteCustomer.html&cid=' + id;
-            //     }
-            // }
-            //
-            // function doFreeze(id, state) {
-            //     if (state == 1) {
-            //         if (confirm("您确定要冻结编号为:" + id + "的客户吗？")) {
-            //             location.href = 'freezecustomer.html&cid=' + id;
-            //         }
-            //     }
-            //     if (state == 2) {
-            //         if (confirm("您确定要解冻编号为:" + id + "的客户吗？")) {
-            //             location.href = 'defreezecustomer.html&cid=' + id;
-            //         }
-            //     }
-            // }
-            //
-            // function editInfo(obj, type) {
-            //     if (type == 0) {
-            //         $("#editForm").attr("action", "addcustomer.html");
-            //         $(".form-control").val("");
-            //     } else {
-            //         var customer = obj.parentNode.parentNode.childNodes;
-            //         $("#editForm").attr("action", "editcustomer.html");
-            //         // $("#op").val("modify");
-            //         $("#cid").val(customer[1].innerText);
-            //         $("#cname").val(customer[3].innerText);
-            //         $("#mobile").val(customer[5].innerText);
-            //         var status = customer[7].innerText == "正常" ? 1 : 2;
-            //         $("#status").val(status);
-            //     }
-            // }
-        </script>
+    </div>
+    <jsp:include page="/part/manager.js.jsp"></jsp:include>
+    <script>
+        $(document).ready(function () {
+            var language = {"sProcessing": "&nbsp&nbsp&nbsp&nbsp&nbsp处理中...", "sLengthMenu": "显示 _MENU_ 项结果", "sZeroRecords": "没有匹配结果", "sInfo": "当前第 _START_ 至 _END_ 条记录，共 _TOTAL_ 条", "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项", "sInfoFiltered": "(共 _MAX_ 页)", "sInfoPostFix": "", "sSearch": "搜索:", "sUrl": "", "sEmptyTable": "表中数据为空", "sLoadingRecords": "载入中...", "sInfoThousands": ",", "oPaginate": {"sFirst": "首页", "sPrevious": "上页", "sNext": "下页", "sLast": "末页"}};
+            $('#dataTables-example').DataTable({
+                "serverSide": true,
+                lengthChange: false,
+                ordering: false,
+                paging: true,
+                pagingType: "full_numbers",
+                processing: true,
+                autoWidth: true,
+                destroy: true,
+                language: language, //国际化
+                ajax: {
+                    url: '/flightList',
+                    dataSrc: 'data'
+                },
+
+                columns: [
+                    {data: 'fno'},
+                    {data: 'departure'},
+                    {data: 'arrival'},
+                    {data: 'ptype'},
+                    {data: 'std'},
+                    {data: 'sta'},
+                    {data: 'atd'},
+                    {data: 'ata'},
+                    {data: 'airport'},
+                    {data: 'atype'},
+                    {data: 'lon'},
+                    {data: 'lat'},
+                ]
+            });
+        });
+    </script>
     </body>
 </html>

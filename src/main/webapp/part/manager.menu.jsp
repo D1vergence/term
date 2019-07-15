@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<ul class="nav" id="main-menu">
 		<li><a href="<%=basePath %>statistical.html">
 		<i class="fa fa-table"></i>图表展示</a></li>
-		<li><a href="<%=basePath %>showflight.html">
+		<li><a href="<%=basePath %>flight">
 		<i class="fa fa-table"></i>航班信息 </a></li>
 		<li><a href="<%=basePath %>showgoods.html">
 		<i class="fa fa-table"></i>商品管理</a></li>
