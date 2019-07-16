@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,7 +40,7 @@ public class FlightController {
     public String flight(@RequestParam(value="pn",defaultValue="1")Integer pn,Model model){
         PageHelper.startPage(pn,30);
         List<FlightInfo> flightInfo=flightInfoMapper.selectByExample(null);
-        model.addAttribute("pageInfo",new PageInfo<>(flightInfo,15));
+        model.addAttribute("pageInfo",new PageInfo<>(flightInfo,30));
         return "flight";
     }
 
@@ -67,7 +68,7 @@ public class FlightController {
     @GetMapping("/flightList")
     public DataTableResultInfo getFlightList(
             @RequestParam(value = "start", required = false, defaultValue="0") Integer start,
-            @RequestParam(value = "length", required = false, defaultValue="15") Integer length,
+            @RequestParam(value = "length", required = false, defaultValue="30") Integer length,
             @RequestParam(value = "draw",required = false,defaultValue = "0") Integer draw
     ){
         int pageNo = (start)/length+1;
@@ -80,6 +81,29 @@ public class FlightController {
         dataTableResultInfo.setLength(length);
         dataTableResultInfo.setRecordsTotal(pageInfo.getTotal());
         dataTableResultInfo.setRecordsFiltered(pageInfo.getTotal());
+
+        return dataTableResultInfo;
+    }
+
+    @ResponseBody
+    @GetMapping("/flightList/{info}")
+    public DataTableResultInfo search(
+            @RequestParam(value = "start", required = false, defaultValue="0") Integer start,
+            @RequestParam(value = "length", required = false, defaultValue="30") Integer length,
+            @RequestParam(value = "draw",required = false,defaultValue = "0") Integer draw,
+            @PathVariable String info
+    ){
+        int pageNo = (start)/length+1;
+        PageHelper.startPage(pageNo,length);
+        Page<FlightInfo> pageInfo = functionalMapper.search(info);
+
+        DataTableResultInfo dataTableResultInfo = new DataTableResultInfo();
+        dataTableResultInfo.setData(pageInfo);
+        dataTableResultInfo.setDraw(draw);
+        dataTableResultInfo.setLength(length);
+        dataTableResultInfo.setRecordsTotal(pageInfo.getTotal());
+        dataTableResultInfo.setRecordsFiltered(pageInfo.getTotal());
+
 
         return dataTableResultInfo;
     }

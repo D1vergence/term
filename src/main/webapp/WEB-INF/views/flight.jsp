@@ -86,60 +86,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!--End Advanced Tables -->
-                        <!-- 按钮触发模态框 -->
-                        <!-- 模态框（Modal） myModal-->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-                             aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"
-                                                aria-hidden="true">×
-                                        </button>
-                                        <form action="<%=basePath%>CustomerServlet"
-                                              method="post">
-                                            <input type="hidden" id="op" name="op">
-                                            <table class="table" style="font: '黑体';">
-                                                <thead>
-                                                <tr>
-                                                    <th>信息：<input type="hidden" id="cid" name="cid"></th>
-                                                    <th></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td><b>客户名:</b></td>
-                                                    <td><input type="text" id="cname" name="cname"
-                                                               class="form-control"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>手机：</b></td>
-                                                    <td><input type="text" id="mobile" name="mobile"
-                                                               class="form-control"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><b>状态：</b></td>
-                                                    <td><select id="status" name="status"
-                                                                class="form-control">
-                                                        <option value="1">正常</option>
-                                                        <option value="2">冻结</option>
-                                                    </select></td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                        data-dismiss="modal">关闭
-                                                </button>
-                                                <input type="submit" value="提交" class="btn btn-primary">
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
+
                         <!-- /.modal -->
                     </div>
                 </div>
@@ -148,9 +95,10 @@
     </div>
     <jsp:include page="/part/manager.js.jsp"></jsp:include>
     <script>
+        var tmp;
         $(document).ready(function () {
             var language = {"sProcessing": "&nbsp&nbsp&nbsp&nbsp&nbsp处理中...", "sLengthMenu": "显示 _MENU_ 项结果", "sZeroRecords": "没有匹配结果", "sInfo": "当前第 _START_ 至 _END_ 条记录，共 _TOTAL_ 条", "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项", "sInfoFiltered": "(共 _MAX_ 页)", "sInfoPostFix": "", "sSearch": "搜索:", "sUrl": "", "sEmptyTable": "表中数据为空", "sLoadingRecords": "载入中...", "sInfoThousands": ",", "oPaginate": {"sFirst": "首页", "sPrevious": "上页", "sNext": "下页", "sLast": "末页"}};
-            $('#dataTables-example').DataTable({
+            var mytable = $('#dataTables-example').dataTable({
                 "serverSide": true,
                 lengthChange: false,
                 ordering: false,
@@ -159,6 +107,8 @@
                 processing: true,
                 autoWidth: true,
                 destroy: true,
+                iDisplayLength:20,
+                // /search:true,
                 language: language, //国际化
                 ajax: {
                     url: '/flightList',
@@ -180,7 +130,49 @@
                     {data: 'lat'},
                 ]
             });
+            $(document).on("keyup","#dataTables-example_filter input",function(){
+                // $('#dataTables-example').dataTable().fnClearTable();
+                // $('#dataTables-example').dataTable().fnDestroy();
+                var info = this.value;
+                tmp = info;
+                console.log(info);
+                $('#dataTables-example').dataTable({
+                    "serverSide": true,
+                    lengthChange: false,
+                    ordering: false,
+                    paging: true,
+                    pagingType: "full_numbers",
+                    processing: true,
+                    autoWidth: true,
+                    destroy: true,
+                    iDisplayLength:20,
+                    language: language, //国际化
+                    ajax: {
+                        url: '/flightList/'+info,
+                        dataSrc: 'data'
+                    },
+
+                    columns: [
+                        {data: 'fno'},
+                        {data: 'departure'},
+                        {data: 'arrival'},
+                        {data: 'ptype'},
+                        {data: 'std'},
+                        {data: 'sta'},
+                        {data: 'atd'},
+                        {data: 'ata'},
+                        {data: 'airport'},
+                        {data: 'atype'},
+                        {data: 'lon'},
+                        {data: 'lat'},
+                    ]
+                });
+                $('#dataTables-example_filter').find("input").val(tmp);
+                $('#dataTables-example_filter').find("input").focus();
+            })
         });
+
+
     </script>
     </body>
 </html>

@@ -5,4 +5,5 @@ import com.github.pagehelper.Page;
 
 public interface FunctionalMapper {
     Page<FlightInfo> findByPage();
+    Page<FlightInfo> search(String info);
 }
