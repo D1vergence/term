@@ -44,11 +44,6 @@ public class FlightController {
         return "flight";
     }
 
-    @GetMapping("/")
-    public String indexGetFlight(Model model){
-        model.addAttribute("list",flightInfoMapper.selectByExample(null));
-        return "statistical";
-    }
 
     @ResponseBody
     @GetMapping("/flightInfo/page/{pageNum}")

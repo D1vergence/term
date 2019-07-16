@@ -30,17 +30,17 @@
                         <!-- Advanced Tables -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <font size="4">用户信息管理</font> <a
-                                    href="showflight.html"> <span
+                                <font size="4">航班信息管理</font> <a
+                                    href="flight"> <span
                                     class="glyphicon glyphicon-repeat"></span>
                             </a>
-                                <span style="float: right">
-									<button type="button" class="btn btn-default btn-sm"
-                                            data-toggle="modal" data-target="#myModal"
-                                            onclick="editInfo(this,0)">
-										<span class="glyphicon glyphicon-plane"></span> 添加客户
-									</button>
-								    </span>
+                                <%--<span style="float: right">--%>
+									<%--<button type="button" class="btn btn-default btn-sm"--%>
+                                            <%--data-toggle="modal" data-target="#myModal"--%>
+                                            <%--onclick="editInfo(this,0)">--%>
+										<%--<span class="glyphicon glyphicon-plane"></span> 航班信息管理--%>
+									<%--</button>--%>
+								    <%--</span>--%>
                             </div>
                             <div class="panel-body">
                                 <div class="table-responsive">

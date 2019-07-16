@@ -10,7 +10,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath %>js/chart.min.js" type="text/javascript" ></script> 
 <script src="<%=basePath %>dataTables/jquery.dataTables.js" type="text/javascript"></script>
 <script src="<%=basePath %>dataTables/dataTables.bootstrap.js" type="text/javascript"></script>
-<script src="<%=basePath %>js/echarts.common.min.js" type="text/javascript"></script>
+<script src="<%=basePath %>js/echarts.js" type="text/javascript"></script>
+<script src="<%=basePath %>js/bmap.min.js" type="text/javascript"></script>
+<script src="<%=basePath %>js/world.js" type="text/javascript"></script>
+<script src="<%=basePath %>js/papaparse.js" type="text/javascript"></script>
+<script src="http://api.map.baidu.com/api?v=2.0&ak=GRlSm0hypc1tKaeNcEGCFwFBngOXb00z"></script>
 <script>
 	//初始化dataTable
 	$(document).ready(function () {

@@ -9,14 +9,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<nav class="navbar-default navbar-side" role="navigation">
 	<div class="sidebar-collapse">
 	<ul class="nav" id="main-menu">
-		<li><a href="<%=basePath %>statistical.html">
+		<li><a href="<%=basePath %>statistical">
 		<i class="fa fa-table"></i>图表展示</a></li>
 		<li><a href="<%=basePath %>flight">
 		<i class="fa fa-table"></i>航班信息 </a></li>
-		<li><a href="<%=basePath %>showgoods.html">
-		<i class="fa fa-table"></i>商品管理</a></li>
-		<li><a href="<%=basePath %>showorder.html">
-		<i class="fa fa-desktop"></i>订单管理</a></li>
+		<li><a href="<%=basePath %>map">
+		<i class="fa fa-table"></i>地图概览</a></li>
+		<li><a href="<%=basePath %>predict">
+		<i class="fa fa-superpowers"></i>准点预测</a></li>
 	</ul>
 	</div>
 	</nav>
