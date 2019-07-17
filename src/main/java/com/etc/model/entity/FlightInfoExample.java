@@ -114,62 +114,52 @@ public class FlightInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andFidEqualTo(String value) {
+        public Criteria andFidEqualTo(Integer value) {
             addCriterion("fid =", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andFidNotEqualTo(String value) {
+        public Criteria andFidNotEqualTo(Integer value) {
             addCriterion("fid <>", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andFidGreaterThan(String value) {
+        public Criteria andFidGreaterThan(Integer value) {
             addCriterion("fid >", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andFidGreaterThanOrEqualTo(String value) {
+        public Criteria andFidGreaterThanOrEqualTo(Integer value) {
             addCriterion("fid >=", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andFidLessThan(String value) {
+        public Criteria andFidLessThan(Integer value) {
             addCriterion("fid <", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andFidLessThanOrEqualTo(String value) {
+        public Criteria andFidLessThanOrEqualTo(Integer value) {
             addCriterion("fid <=", value, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andFidLike(String value) {
-            addCriterion("fid like", value, "fid");
-            return (Criteria) this;
-        }
-
-        public Criteria andFidNotLike(String value) {
-            addCriterion("fid not like", value, "fid");
-            return (Criteria) this;
-        }
-
-        public Criteria andFidIn(List<String> values) {
+        public Criteria andFidIn(List<Integer> values) {
             addCriterion("fid in", values, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andFidNotIn(List<String> values) {
+        public Criteria andFidNotIn(List<Integer> values) {
             addCriterion("fid not in", values, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andFidBetween(String value1, String value2) {
+        public Criteria andFidBetween(Integer value1, Integer value2) {
             addCriterion("fid between", value1, value2, "fid");
             return (Criteria) this;
         }
 
-        public Criteria andFidNotBetween(String value1, String value2) {
+        public Criteria andFidNotBetween(Integer value1, Integer value2) {
             addCriterion("fid not between", value1, value2, "fid");
             return (Criteria) this;
         }

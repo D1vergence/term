@@ -10,7 +10,7 @@ public interface FlightInfoMapper {
 
     int deleteByExample(FlightInfoExample example);
 
-    int deleteByPrimaryKey(String fid);
+    int deleteByPrimaryKey(Integer fid);
 
     int insert(FlightInfo record);
 
@@ -18,7 +18,7 @@ public interface FlightInfoMapper {
 
     List<FlightInfo> selectByExample(FlightInfoExample example);
 
-    FlightInfo selectByPrimaryKey(String fid);
+    FlightInfo selectByPrimaryKey(Integer fid);
 
     int updateByExampleSelective(@Param("record") FlightInfo record, @Param("example") FlightInfoExample example);
 

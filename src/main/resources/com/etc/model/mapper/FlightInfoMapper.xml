@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.etc.model.dao.FlightInfoMapper" >
   <resultMap id="BaseResultMap" type="com.etc.model.entity.FlightInfo" >
-    <id column="fid" property="fid" jdbcType="VARCHAR" />
+    <id column="fid" property="fid" jdbcType="INTEGER" />
     <result column="fno" property="fno" jdbcType="VARCHAR" />
     <result column="departure" property="departure" jdbcType="VARCHAR" />
     <result column="arrival" property="arrival" jdbcType="VARCHAR" />
@@ -91,15 +91,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from flight_info
-    where fid = #{fid,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from flight_info
-    where fid = #{fid,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.etc.model.entity.FlightInfoExample" >
     delete from flight_info
@@ -112,7 +112,7 @@
       arrival, ptype, sta, 
       std, ata, atd, atype, 
       airport, lat, lon)
-    values (#{fid,jdbcType=VARCHAR}, #{fno,jdbcType=VARCHAR}, #{departure,jdbcType=VARCHAR}, 
+    values (#{fid,jdbcType=INTEGER}, #{fno,jdbcType=VARCHAR}, #{departure,jdbcType=VARCHAR}, 
       #{arrival,jdbcType=VARCHAR}, #{ptype,jdbcType=VARCHAR}, #{sta,jdbcType=VARCHAR}, 
       #{std,jdbcType=VARCHAR}, #{ata,jdbcType=VARCHAR}, #{atd,jdbcType=VARCHAR}, #{atype,jdbcType=VARCHAR}, 
       #{airport,jdbcType=VARCHAR}, #{lat,jdbcType=VARCHAR}, #{lon,jdbcType=VARCHAR})
@@ -162,7 +162,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="fid != null" >
-        #{fid,jdbcType=VARCHAR},
+        #{fid,jdbcType=INTEGER},
       </if>
       <if test="fno != null" >
         #{fno,jdbcType=VARCHAR},
@@ -212,7 +212,7 @@
     update flight_info
     <set >
       <if test="record.fid != null" >
-        fid = #{record.fid,jdbcType=VARCHAR},
+        fid = #{record.fid,jdbcType=INTEGER},
       </if>
       <if test="record.fno != null" >
         fno = #{record.fno,jdbcType=VARCHAR},
@@ -257,7 +257,7 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update flight_info
-    set fid = #{record.fid,jdbcType=VARCHAR},
+    set fid = #{record.fid,jdbcType=INTEGER},
       fno = #{record.fno,jdbcType=VARCHAR},
       departure = #{record.departure,jdbcType=VARCHAR},
       arrival = #{record.arrival,jdbcType=VARCHAR},
@@ -314,7 +314,7 @@
         lon = #{lon,jdbcType=VARCHAR},
       </if>
     </set>
-    where fid = #{fid,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.etc.model.entity.FlightInfo" >
     update flight_info
@@ -330,6 +330,6 @@
       airport = #{airport,jdbcType=VARCHAR},
       lat = #{lat,jdbcType=VARCHAR},
       lon = #{lon,jdbcType=VARCHAR}
-    where fid = #{fid,jdbcType=VARCHAR}
+    where fid = #{fid,jdbcType=INTEGER}
   </update>
 </mapper>

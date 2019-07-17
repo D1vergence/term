@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.etc.model.dao.FunctionalMapper" >
     <resultMap id="BaseResultMap" type="com.etc.model.entity.FlightInfo" >
-        <id column="fid" property="fid" jdbcType="VARCHAR" />
+        <id column="fid" property="fid" jdbcType="INTEGER" />
         <result column="fno" property="fno" jdbcType="VARCHAR" />
         <result column="departure" property="departure" jdbcType="VARCHAR" />
         <result column="arrival" property="arrival" jdbcType="VARCHAR" />
@@ -30,7 +30,8 @@
     <select id="search" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />
-        from flight_info where fno like concat('%',#{info},'%')
+        from flight_info where fno like concat('%',#{info},'%') or airport like concat('%',#{info},'%')
+            or departure like concat('%',#{info},'%') or arrival like concat('%',#{info},'%')
     </select>
 
 </mapper>
