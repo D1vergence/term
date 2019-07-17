@@ -30,19 +30,20 @@
                         <!-- Advanced Tables -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <font size="4">航班信息管理</font> <a
-                                    href="flight"> <span
+                                <font size="4">用户信息管理</font> <a
+                                    href="showflight.html"> <span
                                     class="glyphicon glyphicon-repeat"></span>
                             </a>
-                                <%--<span style="float: right">--%>
-									<%--<button type="button" class="btn btn-default btn-sm"--%>
-                                            <%--data-toggle="modal" data-target="#myModal"--%>
-                                            <%--onclick="editInfo(this,0)">--%>
-										<%--<span class="glyphicon glyphicon-plane"></span> 航班信息管理--%>
-									<%--</button>--%>
-								    <%--</span>--%>
+                                <span style="float: right">
+									<button type="button" class="btn btn-default btn-sm"
+                                            data-toggle="modal" data-target="#myModal"
+                                            onclick="editInfo(this,0)">
+										<span class="glyphicon glyphicon-plane"></span> 添加客户
+									</button>
+								    </span>
                             </div>
                             <div class="panel-body">
+                                <input id="mysearch" placeholder="航班/出发地/目的地/机场">
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover"
                                            id="dataTables-example">
@@ -100,6 +101,7 @@
             var language = {"sProcessing": "&nbsp&nbsp&nbsp&nbsp&nbsp处理中...", "sLengthMenu": "显示 _MENU_ 项结果", "sZeroRecords": "没有匹配结果", "sInfo": "当前第 _START_ 至 _END_ 条记录，共 _TOTAL_ 条", "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项", "sInfoFiltered": "(共 _MAX_ 页)", "sInfoPostFix": "", "sSearch": "搜索:", "sUrl": "", "sEmptyTable": "表中数据为空", "sLoadingRecords": "载入中...", "sInfoThousands": ",", "oPaginate": {"sFirst": "首页", "sPrevious": "上页", "sNext": "下页", "sLast": "末页"}};
             var mytable = $('#dataTables-example').dataTable({
                 "serverSide": true,
+                bServerSide:true,
                 lengthChange: false,
                 ordering: false,
                 paging: true,
@@ -108,8 +110,8 @@
                 autoWidth: true,
                 destroy: true,
                 iDisplayLength:20,
-                // /search:true,
-                language: language, //国际化
+                bFilter:false,
+                // language: language,
                 ajax: {
                     url: '/flightList',
                     dataSrc: 'data'
@@ -130,12 +132,21 @@
                     {data: 'lat'},
                 ]
             });
-            $(document).on("keyup","#dataTables-example_filter input",function(){
+            $(document).on("keyup","#mysearch",function(){
                 // $('#dataTables-example').dataTable().fnClearTable();
                 // $('#dataTables-example').dataTable().fnDestroy();
                 var info = this.value;
                 tmp = info;
-                console.log(info);
+                // $.ajax({
+                //     url: '/flightList/'+info,
+                //     // dataType:'json',
+                //     success:function (msg) {
+                //         $('#dataTables-example').dataTable().fnClearTable();
+                //         $('#dataTables-example').dataTable().fnAddData(msg.data,true);
+                //         $('#dataTables-example').dataTable().fnDraw(false);
+                //         // console.log($('#dataTables-example').dataTable().attr());
+                //     }
+                // })
                 $('#dataTables-example').dataTable({
                     "serverSide": true,
                     lengthChange: false,
@@ -145,6 +156,7 @@
                     processing: true,
                     autoWidth: true,
                     destroy: true,
+                    bFilter:false,
                     iDisplayLength:20,
                     language: language, //国际化
                     ajax: {
@@ -167,10 +179,9 @@
                         {data: 'lat'},
                     ]
                 });
-                $('#dataTables-example_filter').find("input").val(tmp);
-                $('#dataTables-example_filter').find("input").focus();
             })
         });
+
 
 
     </script>
