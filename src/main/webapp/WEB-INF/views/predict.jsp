@@ -32,14 +32,12 @@
     <div id="page-wrapper">
         <div id="page-inner">
             <div id="flight-predict-form" style="width:100%;height:100%">
-                <span>航班</span>
-                <select id="fno" class="input-text radius size-L"></select>
-                <span>机型</span>
-                <select id="ptype" class="input-text radius size-L"></select>
-                <span>目的地</span>
-                <select id="arrival" class="input-text radius size-L"></select>
-                <span>天气</span>
-                <select id="weather" class="input-text radius size-L"></select>
+
+                <input id="fno" name="language" placeholder="航班" type="text">
+                <input id="ptype" name="language" placeholder="机型" type="text">
+                <input id="arrival" name="language" placeholder="目的地" type="text">
+                <input id="weather" name="language" placeholder="天气" type="text">
+
                 <button id="submitbtn" type="button" class="btn btn-success btn-lg">预测</button>
             </div>
             <div id="predictresult">
@@ -73,10 +71,10 @@
             success: function (data) {
                 var d = eval("(" + data + ")");
                 for(var i = 0; i < d.length; i++) {
-                    var value = d[i].fno;
-                    var text = d[i].fno;
-                    var opt = "<option value='" + value + "'>" + text + "</option>";
+                    var value = d[i];
+                    var opt = "<option value='" + value + "'>" + value + "</option>";
                     $("#fno").append(opt);
+                    $("#fno").autocomplete({data});
                 }
             }
         });
@@ -85,15 +83,15 @@
     function get_ptype(){
         $.ajax({
             type: "post",
-            url: 'getFno',
+            url: 'getPtype',
             dataType: "json",
             success: function (data) {
                 var d = eval("(" + data + ")");
-                for(var i = 0; i < d.length; i++) {
-                    var value = d[i].ptype;
-                    var text = d[i].ptype;
+                for (var i = 0; i < d.length; i++) {
+                    var value = d[i];
                     var opt = "<option value='" + value + "'>" + text + "</option>";
                     $("#ptype").append(opt);
+                    $("#ptype").autocomplete({data});
                 }
             }
         });
@@ -107,10 +105,10 @@
             success: function (data) {
                 var d = eval("(" + data + ")");
                 for(var i = 0; i < d.length; i++) {
-                    var value = d[i].arrival;
-                    var text = d[i].arrival;
+                    var value = d[i];
                     var opt = "<option value='" + value + "'>" + text + "</option>";
                     $("#arrival").append(opt);
+                    $("#arrival").autocomplete({data});
                 }
             }
         });
@@ -124,10 +122,10 @@
             success: function (data) {
                 var d = eval("(" + data + ")");
                 for(var i = 0; i < d.length; i++) {
-                    var value = d[i].weather;
-                    var text = d[i].weather;
+                    var value = d[i];
                     var opt = "<option value='" + value + "'>" + text + "</option>";
                     $("#weather").append(opt);
+                    $("#weather").autocomplete({data});
                 }
             }
         });
