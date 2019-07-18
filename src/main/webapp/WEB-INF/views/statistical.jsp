@@ -52,9 +52,9 @@
 					<%--</div>--%>
 					<%--<div class="col-md-6 col-sm-12 col-xs-12">--%>
 						<div class="panel panel-default">
-							<div class="panel-heading">品类销售额环形图</div>
+							<div class="panel-heading">日准点率分布图</div>
 							<div class="panel-body">
-								<div id="total-doughnut-echarts" style="width:auto;height:700px"></div>
+								<div id="date-ontime-echarts" style="width:auto;height:700px"></div>
 							</div>
 						</div>
 					<%--</div>--%>
@@ -283,8 +283,10 @@
     hoeChart.setOption(hoeOption);
 
     var dpeChart = echarts.init(document.getElementById("date-ptype-echarts"));
-    var ptype = [];
 
+    var doeChart = echarts.init(document.getElementById("date-ontime-echarts"));
+    var ptype = [];
+	var date = [];
     Papa.parse('<%=basePath%>data/dateptype.csv', {
         download: true,
         complete: function (results) {
@@ -355,7 +357,67 @@
             }
 
             dpeChart.setOption(dpeOption);
+
+            Papa.parse('<%=basePath%>data/date_rate.csv', {
+                download: true,
+                complete: function (results) {
+                    //采用papaparse获取csv中的数据
+                    var rowData = results.data.reverse();
+                    //console.log(rowData);
+
+                    for (i = 1; i < rowData.length; i++) {
+                        var temp = [];
+                        temp[0] = rowData[i][0];
+                        temp[1] = Number(rowData[i][1]) * 1000;
+                        date.push(temp);
+                    }
+                    console.log(date);
+
+                    var doeOption = {
+                        title: {
+                            top: 30,
+                            left: 'center',
+                            text: '2018年1-6月每日的准点率(千分比)'
+                        },
+                        tooltip: {},
+                        visualMap: {
+                            min: 0,
+                            max: 1000,
+                            orient: 'horizontal',
+                            calculable: true,
+                            left: 'center',
+                            top: 65,
+                            textStyle: {
+                                color: '#000'
+                            }
+                        },
+                        calendar: {
+                            top: 120,
+                            left: 60,
+                            right: 60,
+                            cellSize: ['auto', 'auto'],
+                            range: ['2018-01-01', '2018-06-30'],
+                            itemStyle: {
+                                normal: {borderWidth: 0.5}
+                            },
+                            yearLabel: {show: false}
+                        },
+                        series: {
+                            type: 'heatmap',
+                            coordinateSystem: 'calendar',
+                            data: date
+                        },
+                        tooltip: {
+                            position: 'bottom'
+                        }
+                    }
+
+                    doeChart.setOption(doeOption);
+                }
+            });
         }
     });
+
+
 </script>
 </html>

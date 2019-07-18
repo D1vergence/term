@@ -7,7 +7,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminService {
-    private AdminMapper adminMapper;
+    @Autowired
+    AdminMapper adminMapper;
 
     public AdminMapper getAdminMapper() {
         return adminMapper;
