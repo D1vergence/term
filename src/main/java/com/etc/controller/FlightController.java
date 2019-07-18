@@ -44,21 +44,6 @@ public class FlightController {
         return "flight";
     }
 
-
-    @ResponseBody
-    @GetMapping("/flightInfo/page/{pageNum}")
-    public PageInfo<FlightInfo> getPartFlight(@PathVariable Integer pageNum){
-        PageHelper.startPage(pageNum,15);
-        return new PageInfo(flightInfoMapper.selectByExample(null));
-    }
-
-    @ResponseBody
-    @GetMapping("/flightInfo/{pageNum}")
-    public Page<FlightInfo> getFlight(@PathVariable Integer pageNum){
-        PageHelper.startPage(pageNum,15);
-        return functionalMapper.findByPage();
-    }
-
     @ResponseBody
     @GetMapping("/flightList")
     public DataTableResultInfo getFlightList(
@@ -104,6 +89,31 @@ public class FlightController {
     }
 
 
+    @ResponseBody
+    @GetMapping("/getFno")
+    public List<String> getFno(){
+        return functionalMapper.getFno();
+    }
 
+    @ResponseBody
+    @GetMapping("/getPtype")
+    public List<String> getPtype(){
+        return functionalMapper.getPtype();
+    }
 
+    @ResponseBody
+    @GetMapping("/getArrival")
+    public List<FlightInfo> getArrival(){
+        return functionalMapper.getArrival();
+    }
+
+    @PostMapping("/predict")
+    public void predict(String fno,String ptype,String arrival,String temperature,String weather,String visible){
+        System.out.println(fno);
+        System.out.println(ptype);
+        System.out.println(arrival);
+        System.out.println(temperature);
+        System.out.println(weather);
+        System.out.println(visible);
+    }
 }

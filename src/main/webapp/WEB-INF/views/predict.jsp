@@ -42,7 +42,7 @@
                 <br>
                 <%--<input id="weather" class="input-text radius size-L" placeholder="气候" type="text" style="width: 20%;">--%>
                 <span class="select-box radius mt-20">
-				<select id="weather" class="select" size="1" name="demo2" style="width: 20%;">
+				<select id="weather" class="select" size="1" name="demo2" >
 					<option value="" selected="">天气</option>
 					<option value="0">无</option>
 					<option value="1">轻雾</option>
@@ -57,7 +57,7 @@
                 <br>
                 <%--<input id="visible" class="input-text radius size-L" placeholder="可见度" type="text" style="width: 20%;">--%>
                 <span class="select-box radius mt-20">
-				<select id="visible" class="select" size="1" name="demo2" style="width: 20%;">
+				<select id="visible" class="select" size="1" name="demo2">
 					<option value="" selected="">可见度</option>
 					<option value="0">低</option>
 					<option value="1">高</option>
@@ -76,6 +76,9 @@
 </body>
 <style type="text/css">
 
+    .select-box{
+        width: 20%;
+    }
     .predictresult{
         margin: 15px;
     }
@@ -158,6 +161,7 @@
     }
 </style>
 <script type="text/javascript">
+    var data = [];
     window.onload=function(){
         var txt = document.getElementById("temperature");
         txt.onkeypress = function(evt){
@@ -179,24 +183,23 @@
     }
 
     $("#submitbtn").click(function(){
-        $.post("predict",
+        $.post("/predict",
             {
-                fno:$("#fno").text(),
-                ptype:$("#ptype").text(),
-                arrival:$("#arrival").text(),
-                weather:$("#weather").text()
+                fno:$("#fno").val(),
+                ptype:$("#ptype").val(),
+                arrival:$("#arrival").val(),
+                temperature:$("#temperature").val(),
+                weather:$("#weather").val(),
+                visible:$("#visible").val()
             },
             function(data,status){
             $("#predictresult").prop(value,data.acc);
         });
     });
 
-    var fno = [
-        { "value": "AS1636", "label": "AS1636" },
-        { "value": "AS1637", "label": "AS1637" },
-        { "value": "AS1638", "label": "AS1638" }
-    ];
-
+    var fno = [];
+    var ptype = [];
+    var arrival = [];
 
     $(function () {
         $('#fno').autocompleter({
@@ -222,19 +225,30 @@
     $(function () {
         $('#ptype').autocompleter({
             highlightMatches: true,
-
             // object to local or url to remote search
-            source: data,
-
+            source: ptype,
             // custom template
             template: '{{ label }}',
-
             // // show hint
             // hint: true,
-
             // abort source if empty field
             empty: false,
+            // max results
+            limit: 5
+        });
+    });
 
+    $(function () {
+        $('#arrival').autocompleter({
+            highlightMatches: true,
+            // object to local or url to remote search
+            source: arrival,
+            // custom template
+            template: '{{ label }}',
+            // // show hint
+            // hint: true,
+            // abort source if empty field
+            empty: false,
             // max results
             limit: 5
         });
@@ -243,7 +257,7 @@
     function get_fno(){
         $.ajax({
             type: "get",
-            url: 'getFno',
+            url: '/getFno',
             dataType: "json",
             success: function (data) {
                 var list = data;
@@ -253,67 +267,54 @@
                     temp.label=data[i];
                     fno.push(temp);
                 }
+                // console.log(fno);
             }
         });
     }
-    //
-    // function get_ptype(){
-    //     $.ajax({
-    //         type: "post",
-    //         url: 'getPtype',
-    //         dataType: "json",
-    //         success: function (data) {
-    //             var d = eval("(" + data + ")");
-    //             for(var i = 0; i < d.length; i++) {
-    //                 var value = d[i].ptype;
-    //                 var text = d[i].ptype;
-    //                 var opt = "<option value='" + value + "'>" + text + "</option>";
-    //                 $("#ptype").append(opt);
-    //             }
-    //         }
-    //     });
-    // }
-    //
-    // function get_arrival(){
-    //     $.ajax({
-    //         type: "post",
-    //         url: 'getArrival',
-    //         dataType: "json",
-    //         success: function (data) {
-    //             var d = eval("(" + data + ")");
-    //             for(var i = 0; i < d.length; i++) {
-    //                 var value = d[i].arrival;
-    //                 var text = d[i].arrival;
-    //                 var opt = "<option value='" + value + "'>" + text + "</option>";
-    //                 $("#arrival").append(opt);
-    //             }
-    //         }
-    //     });
-    // }
-    //
-    // function get_weather(){
-    //     $.ajax({
-    //         type: "post",
-    //         url: 'getWeather',
-    //         dataType: "json",
-    //         success: function (data) {
-    //             var d = eval("(" + data + ")");
-    //             for(var i = 0; i < d.length; i++) {
-    //                 var value = d[i].weather;
-    //                 var text = d[i].weather;
-    //                 var opt = "<option value='" + value + "'>" + text + "</option>";
-    //                 $("#weather").append(opt);
-    //             }
-    //         }
-    //     });
-    // }
 
+    function get_ptype(){
+        $.ajax({
+            type: "get",
+            url: '/getPtype',
+            dataType: "json",
+            success: function (data) {
+                var list = data;
+                console.log(data);
+                for(var i = 0; i < list.length; i++) {
+                    var temp = {};
+                    temp.value=data[i];
+                    temp.label=data[i];
+                    ptype.push(temp);
+                }
+                console.log(ptype);
+            }
+        });
+    }
+
+    function get_arrival(){
+        $.ajax({
+            type: "get",
+            url: '/getArrival',
+            dataType: "json",
+            success: function (data) {
+                var list = data;
+                for(var i = 0; i < list.length; i++) {
+                    var temp = {};
+                    temp.value=data[i].arrival;
+                    temp.label=data[i].airport;
+                    arrival.push(temp);
+                }
+            }
+        });
+    }
+    data=[
+        {"value":"JGS","label":""}
+    ]
     $(document).ready(function() {
 
         get_fno();
         get_ptype();
         get_arrival();
-        get_weather();
 
     });
 </script>

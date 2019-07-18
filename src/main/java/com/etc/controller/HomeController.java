@@ -1,6 +1,7 @@
 package com.etc.controller;
 
 import com.etc.model.dao.AdminMapper;
+import com.etc.util.FlightAnalyzer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,20 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
+    @Autowired
     private AdminMapper adminMapper;
 
-    public AdminMapper getAdminMapper() {
-        return adminMapper;
-    }
-
-    @Autowired
-    public void setAdminMapper(AdminMapper adminMapper) {
-        this.adminMapper = adminMapper;
-    }
 
     @RequestMapping("/")
-    public String home(){
-        return "predict";
+    public String home() throws Exception {
+        FlightAnalyzer.toPython("WJ5728","HIA","B737");
+        return "flight";
     }
 
     @GetMapping("/login")
@@ -33,11 +28,15 @@ public class HomeController {
     }
 
 
+    @GetMapping("/predict")
+    public String toPredict(){
+        return "predict";
+    }
 
-//    @PostMapping("/login")
-//    public void login(){
-//        System.out.println("for test");
-//    }
+    @GetMapping("/map")
+    public String toMap(){
+        return "map";
+    }
 
     @GetMapping("/error")
     public String error(){

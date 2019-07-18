@@ -34,4 +34,17 @@
             or departure like concat('%',#{info},'%') or arrival like concat('%',#{info},'%')
     </select>
 
+    <select id="getFno" resultType="String">
+        select distinct fno
+        from flight_info
+    </select>
+
+    <select id="getArrival" resultType="com.etc.model.entity.FlightInfo">
+        SELECT DISTINCT arrival,airport FROM flight_info
+    </select>
+
+    <select id="getPtype" resultType="String">
+        SELECT DISTINCT ptype FROM flight_info
+    </select>
+
 </mapper>

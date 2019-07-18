@@ -30,8 +30,8 @@
                         <!-- Advanced Tables -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <font size="4">用户信息管理</font> <a
-                                    href="showflight.html"> <span
+                                <font size="4">航班记录</font> <a
+                                    href="flight"> <span
                                     class="glyphicon glyphicon-repeat"></span>
                             </a>
                                 <span style="float: right">
@@ -111,7 +111,7 @@
                 destroy: true,
                 iDisplayLength:20,
                 bFilter:false,
-                // language: language,
+                language: language,
                 ajax: {
                     url: '/flightList',
                     dataSrc: 'data'
@@ -137,16 +137,6 @@
                 // $('#dataTables-example').dataTable().fnDestroy();
                 var info = this.value;
                 tmp = info;
-                // $.ajax({
-                //     url: '/flightList/'+info,
-                //     // dataType:'json',
-                //     success:function (msg) {
-                //         $('#dataTables-example').dataTable().fnClearTable();
-                //         $('#dataTables-example').dataTable().fnAddData(msg.data,true);
-                //         $('#dataTables-example').dataTable().fnDraw(false);
-                //         // console.log($('#dataTables-example').dataTable().attr());
-                //     }
-                // })
                 $('#dataTables-example').dataTable({
                     "serverSide": true,
                     lengthChange: false,
