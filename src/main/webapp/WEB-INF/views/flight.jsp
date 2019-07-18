@@ -16,7 +16,7 @@
         <title>航班信息管理</title>
         <jsp:include page="/part/manager.css.jsp"></jsp:include>
     </head>
-    <body>
+    <body style="background-color: #3E3E3E">
     <div id="wrapper">
         <!--头部-->
         <jsp:include page="/part/manager.header.jsp"></jsp:include>

@@ -15,6 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="<%=basePath %>js/world.js" type="text/javascript"></script>
 <script src="<%=basePath %>js/papaparse.js" type="text/javascript"></script>
 <script src="<%=basePath %>js/H-ui.js" type="text/javascript"></script>
+<script src="<%=basePath %>js/jquery.autocompleter.min.js" type="text/javascript"></script>
 <script src="http://api.map.baidu.com/api?v=2.0&ak=GRlSm0hypc1tKaeNcEGCFwFBngOXb00z"></script>
 <script>
 	//初始化dataTable

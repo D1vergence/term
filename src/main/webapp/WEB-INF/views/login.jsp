@@ -34,7 +34,7 @@
     }
 
 </script>
-<body>
+<body style="background-color: #3E3E3E">
 <div id="login-page" style="opacity: 0.75">
     <div class="container">
         <form class="form-login" action="login" method="post">

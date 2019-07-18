@@ -24,13 +24,14 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home(){
-        return "flight";
+        return "predict";
     }
 
     @GetMapping("/login")
     public String tologin(){
         return "login";
     }
+
 
 
 //    @PostMapping("/login")

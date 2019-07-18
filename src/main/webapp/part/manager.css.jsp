@@ -7,4 +7,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="<%=basePath %>css/font-awesome.css" rel="stylesheet" />
 <link href="<%=basePath %>css/custom-styles.css" rel="stylesheet" />
 <link href="<%=basePath %>css/H-ui.css" rel="stylesheet" />
+<link href="<%=basePath %>css/jquery.autocompleter.css" rel="stylesheet" />
 <link href="<%=basePath %>dataTables/dataTables.bootstrap.css" rel="stylesheet" />

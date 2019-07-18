@@ -21,7 +21,7 @@
 <title>地图概览</title>
 <jsp:include page="/part/manager.css.jsp"></jsp:include>
 </head>
-<body>
+<body style="background-color: #3E3E3E">
 <div id="wrapper">
     <!--头部：页面标题栏-->
     <jsp:include page="/part/manager.header.jsp"></jsp:include>
