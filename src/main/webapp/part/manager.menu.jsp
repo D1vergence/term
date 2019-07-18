@@ -12,11 +12,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<li><a href="<%=basePath %>statistical">
 		<i class="fa fa-table"></i>图表展示</a></li>
 		<li><a href="<%=basePath %>flight">
-		<i class="fa fa-table"></i>航班信息 </a></li>
+		<i class="fa fa-plane"></i>航班信息 </a></li>
 		<li><a href="<%=basePath %>map">
-		<i class="fa fa-table"></i>地图概览</a></li>
+		<i class="fa fa-map-marker"></i>地图概览</a></li>
 		<li><a href="<%=basePath %>predict">
-		<i class="fa fa-superpowers"></i>准点预测</a></li>
+		<i class="fa fa-star"></i>准点预测</a></li>
 	</ul>
 	</div>
 	</nav>
