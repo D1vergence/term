@@ -6,6 +6,7 @@ import com.etc.model.dao.FunctionalMapper;
 import com.etc.model.entity.Flight;
 import com.etc.model.entity.FlightInfo;
 import com.etc.util.DataTableResultInfo;
+import com.etc.util.FlightAnalyzer;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -107,13 +108,9 @@ public class FlightController {
         return functionalMapper.getArrival();
     }
 
+    @ResponseBody
     @PostMapping("/predict")
-    public void predict(String fno,String ptype,String arrival,String temperature,String weather,String visible){
-        System.out.println(fno);
-        System.out.println(ptype);
-        System.out.println(arrival);
-        System.out.println(temperature);
-        System.out.println(weather);
-        System.out.println(visible);
+    public String predict(String fno,String ptype,String arrival,String temperature,String weather,String visible) throws Exception {
+        return FlightAnalyzer.toPython(fno,ptype,arrival,temperature,weather,visible)+"";
     }
 }

@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a>
 						<ul class="dropdown-menu dropdown-user">
 							<li>
-							<a href="<%=basePath %>logout.html"><i class="fa fa-sign-out fa-fw"></i>
+							<a href="<%=basePath %>logout"><i class="fa fa-sign-out fa-fw"></i>
 								登出
 							</a>
 							</li>

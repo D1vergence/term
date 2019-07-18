@@ -18,7 +18,6 @@ test_data = numpy.array(test_file['data'])
 test_input = test_data[:,0:-1]
 test_label = test_data[:,-1]
 
-
 # DecisionTreeClassifier 0.59
 dtc = DecisionTreeClassifier(criterion='entropy',max_depth=None)
 dtc.fit(data_input,train_label)
@@ -26,13 +25,11 @@ sco1 = dtc.score(test_input,test_label)
 # cdx = dtc.predict_proba(test_input)
 print("[fit]",sco1)
 
-
 # KNeighborsClassifier 0.64
 knn=neighbors.KNeighborsClassifier(n_neighbors=31,n_jobs=-1)
 knn.fit(data_input,train_label)
 sco3=knn.score(test_input,test_label)
 print("[fit]",sco3)
-
 
 joblib.dump(knn, "model.dat")
 

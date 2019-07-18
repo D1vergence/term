@@ -18,7 +18,7 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() throws Exception {
-        FlightAnalyzer.toPython("WJ5728","HIA","B737");
+        //FlightAnalyzer.toPython("WJ5728","HIA","B737");
         return "flight";
     }
 

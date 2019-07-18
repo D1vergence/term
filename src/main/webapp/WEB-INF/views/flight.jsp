@@ -38,7 +38,7 @@
 									<button type="button" class="btn btn-default btn-sm"
                                             data-toggle="modal" data-target="#myModal"
                                             onclick="editInfo(this,0)">
-										<span class="glyphicon glyphicon-plane"></span> 添加客户
+										<span class="glyphicon glyphicon-plane"></span>
 									</button>
 								    </span>
                             </div>
